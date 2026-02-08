@@ -17,7 +17,7 @@
         #input-screen, #quiz-screen, #result-screen, #pre-result { display: none; }
         input { padding: 15px; margin: 10px; width: 85%; border: 2px solid #ddd; border-radius: 12px; font-family: 'Cairo'; text-align: center; font-size: 1.1rem; outline: none; }
         .btn { background: var(--main); color: white; border: none; padding: 15px 50px; border-radius: 12px; cursor: pointer; font-family: 'Cairo'; font-size: 1.2rem; margin: 10px; font-weight: bold; width: 100%; max-width: 400px; }
-        .btn-wa { background: #25D366; }
+        .btn-wa { background: #25D366; margin-top: 10px; }
         .opt-label { display: flex; align-items: center; background: #f9f9f9; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 15px; cursor: pointer; font-size: 1.1rem; transition: 0.2s; text-align: right; }
         .opt-label input { width: auto; margin-left: 15px; }
         .result-box { border: 4px double var(--main); padding: 25px; margin: 20px 0; text-align: center; line-height: 1.8; font-size: 1.1rem; border-radius: 20px; background: #fbfbff; }
@@ -71,7 +71,7 @@
 </div>
 
 <script>
-    // تحميل الإعلانات بذكاء لتجنب الثقل
+    // تحميل الإعلانات بذكاء
     function loadAds() {
         if (!window.adsLoaded) {
             var script = document.createElement('script');
@@ -87,7 +87,6 @@
         0: ["أستمتع بلقاء أشخاص جدد.<br><small>I enjoy meeting new people.</small>", "أهتم بمشاعر الآخرين دائماً.<br><small>I always care about others' feelings.</small>", "أنهي مهامي في وقتها المحدد.<br><small>I finish my tasks on time.</small>", "أشعر بالقلق والتوتر بسهولة.<br><small>I feel anxious and stressed easily.</small>", "أحب النقاشات الفلسفية العميقة.<br><small>I love deep philosophical discussions.</small>", "أفضل الوحدة على الزحام.<br><small>I prefer solitude over crowds.</small>", "أثق بنوايا الناس الطيبة.<br><small>I trust people's good intentions.</small>", "أواجه صعوبة في تنظيم غرفتي.<br><small>I find it hard to organize my room.</small>", "أتحكم في انفعالاتي وغضبي.<br><small>I control my emotions and anger.</small>", "أحب تجربة الجديد دائماً.<br><small>I always love trying new things.</small>", "أنا شخص اجتماعي جداً.<br><small>I am a very social person.</small>", "أنتقد الآخرين بصراحة.<br><small>I criticize others frankly.</small>", "أهتم بالتفاصيل الدقيقة.<br><small>I pay attention to small details.</small>", "أشعر بالحزن بلا سبب واضح.<br><small>I feel sad for no clear reason.</small>", "خيالي واسع وأحلامي كثيرة.<br><small>I have a vivid imagination and many dreams.</small>", "أحب العمل ضمن فريق.<br><small>I love working in a team.</small>", "أتعاطف مع معاناة غيري.<br><small>I empathize with others' suffering.</small>", "أسوف في أعمالي أحياناً.<br><small>I procrastinate on my work sometimes.</small>", "أثق في قدرتي على النجاح.<br><small>I trust my ability to succeed.</small>", "أقدر الفنون والجماليات.<br><small>I appreciate arts and aesthetics.</small>"],
         1: ["أخطط لكل خطوة في حياتي.<br><small>I plan every step in my life.</small>", "أحتاج للهدوء لأستعيد طاقتي.<br><small>I need quiet to regain my energy.</small>", "أعتمد على المنطق الصارم.<br><small>I rely on strict logic.</small>", "أهتم للنتائج العملية فقط.<br><small>I only care about practical results.</small>", "أكره التغييرات المفاجئة.<br><small>I hate sudden changes.</small>", "أفكر في المستقبل البعيد.<br><small>I think about the distant future.</small>", "أحب القوانين والأنظمة.<br><small>I like laws and systems.</small>", "أنا مستمع جيد للآخرين.<br><small>I am a good listener to others.</small>", "أحكم بعقلي لا بقلبي.<br><small>I judge with my mind, not my heart.</small>", "أحب النظام الدقيق جداً.<br><small>I love precise order.</small>", "أبحث عن المعاني العميقة.<br><small>I look for deep meanings.</small>", "أكره المواجهات المباشرة.<br><small>I hate direct confrontations.</small>", "أنا شخص واقعي تماماً.<br><small>I am a totally realistic person.</small>", "ألتزم بمواعيدي بدقة.<br><small>I stick to my appointments precisely.</small>", "أهتم بجوهر الأمور دائماً.<br><small>I always care about the essence of things.</small>", "أحب الوضوح التام والصدق.<br><small>I love total clarity and honesty.</small>", "أنا شخص هادئ بطبعي.<br><small>I am calm by nature.</small>", "أفضل العمل المنفرد.<br><small>I prefer working alone.</small>", "أحلل كل ما أراه حولي.<br><small>I analyze everything I see around me.</small>", "أتحمل المسؤولية كاملة.<br><small>I take full responsibility.</small>"]
     };
-    // تعبئة باقي الـ 400 سؤال لضمان عمل كاع الكويزات
     for(let i=2; i<=19; i++) { questionsBank[i] = questionsBank[0]; }
 
     const quizzes = [
@@ -125,7 +124,7 @@
                 document.getElementById('home-screen').style.display = 'none'; 
                 document.getElementById('input-screen').style.display = 'block'; 
                 document.getElementById('chosen-title').innerText = q.ar + " | " + q.en;
-                loadAds(); // شحن الإعلانات هنا
+                loadAds();
             };
             menu.appendChild(div);
         });
@@ -172,7 +171,6 @@
         document.getElementById('score-text').innerText = p + "%";
         
         let d = "";
-        // نتائج طويلة ومفصلة باللغتين ديما
         if(p > 70) {
             d = `<b>يا ${username}، نتيجتك استثنائية جداً! | Your result is exceptional!</b><br>أنت تمتلك شخصية قوية وواثقة، وتعرف جيداً كيف تدير حياتك بذكاء وحكمة بالغة.<br><small>You have a strong, confident personality and know how to manage your life with wisdom.</small><br>هذا التوازن يجعلك ملهماً للآخرين ومتميزاً في أي مجال تدخله بثبات.<br><small>This balance makes you an inspiration to others and a standout in any field.</small>`;
         } else {
@@ -188,5 +186,6 @@
     }
     initMenu();
 </script>
+<script data-goatcounter="https://man-ana.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
