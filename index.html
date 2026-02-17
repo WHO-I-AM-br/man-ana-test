@@ -27,7 +27,7 @@
         .en-sub { display: block; color: #888; font-size: 1rem; margin-top: 8px; font-weight: 500; font-style: italic; border-top: 1px dashed #eee; padding-top: 5px; }
     </style>
 </head>
-<body>
+<body onload="loadAds()">
 
 <div class="container">
     <div id="home-screen">
@@ -98,104 +98,92 @@
         12: ["أتعلم الأشياء من أول مرة.<span class='en-sub'>I learn things from the first time.</span>", "أنا سريع جداً في الفهم.<span class='en-sub'>I am very fast at understanding.</span>", "أفهم التعليمات بسرعة.<span class='en-sub'>I understand instructions quickly.</span>", "أنجز الاختبارات قبل غيري.<span class='en-sub'>I finish tests before others.</span>", "لدي ردود فعل سريعة.<span class='en-sub'>I have fast reflexes.</span>", "أفهم ما وراء الكلام.<span class='en-sub'>I understand what's behind words.</span>", "أنا ذكي في تصرفاتي.<span class='en-sub'>I am smart in my actions.</span>", "أعرف كيف أتصرف في الأزمات.<span class='en-sub'>I know how to act in crises.</span>", "لدي عقل متفتح جداً.<span class='en-sub'>I have a very open mind.</span>", "أستوعب المعلومات الضخمة.<span class='en-sub'>I absorb huge information.</span>", "أنا بارع في البديهة.<span class='en-sub'>I am gifted in intuition.</span>", "أفهم التلميحات فوراً.<span class='en-sub'>I understand hints immediately.</span>", "لدي قدرة عالية على الاستيعاب.<span class='en-sub'>I have high comprehension capacity.</span>", "أنا شخص يقظ جداً.<span class='en-sub'>I am a very alert person.</span>", "أعرف كيف أحل التعقيدات.<span class='en-sub'>I know how to solve complexities.</span>", "لدي عقل عملي وسريع.<span class='en-sub'>I have a practical and fast mind.</span>", "أفهم المواقف بلمحة.<span class='en-sub'>I understand situations at a glance.</span>", "أنا ذكي في تواصلي.<span class='en-sub'>I am smart in my communication.</span>", "أعرف كيف أختصر الأمور.<span class='en-sub'>I know how to shorten things.</span>", "لدي مهارة حل المشكلات.<span class='en-sub'>I have problem-solving skills.</span>"],
         13: ["أعرف ما أشعر به دائماً.<span class='en-sub'>I know what I feel always.</span>", "أتحكم في مشاعري السلبية.<span class='en-sub'>I control my negative feelings.</span>", "أفهم مشاعر الآخرين.<span class='en-sub'>I understand others' feelings.</span>", "أعرف كيف أهدئ نفسي.<span class='en-sub'>I know how to calm myself.</span>", "أنا شخص متعاطف جداً.<span class='en-sub'>I am a very empathetic person.</span>", "أعرف كيف أبني علاقات دافئة.<span class='en-sub'>I know how to build warm relationships.</span>", "أتحمل المسؤولية كاملة.<span class='en-sub'>I take full responsibility for my feelings.</span>", "أعرف نقاط قوتي العاطفية.<span class='en-sub'>I know my emotional strengths.</span>", "أنا شخص متزن انفعالياً.<span class='en-sub'>I am emotionally balanced.</span>", "أعرف كيف أواسي الحزين.<span class='en-sub'>I know how to comfort the sad.</span>", "لدي ذكاء في التعامل مع الغضب.<span class='en-sub'>I have intelligence in dealing with anger.</span>", "أفهم دوافع الناس العاطفية.<span class='en-sub'>I understand people's emotional motives.</span>", "أنا شخص مستقر عاطفياً.<span class='en-sub'>I am emotionally stable.</span>", "أعرف كيف أعبر عن حبي.<span class='en-sub'>I know how to express my love.</span>", "لدي قدرة على الإقناع العاطفي.<span class='en-sub'>I have emotional persuasion capacity.</span>", "أنا شخص يقدر المشاعر.<span class='en-sub'>I am a person who values feelings.</span>", "أعرف كيف أحل النزاعات العاطفية.<span class='en-sub'>I know how to solve emotional conflicts.</span>", "أنا صبور مع مشاعر الغير.<span class='en-sub'>I am patient with others' feelings.</span>", "لدي وعي عاطفي كبير.<span class='en-sub'>I have a great emotional awareness.</span>", "أعرف كيف أسعد نفسي.<span class='en-sub'>I know how to make myself happy.</span>"],
         14: ["أنا منسجم مع أحاسيسي.<span class='en-sub'>I am in tune with my senses.</span>", "أعرف كيف أدير انفعالاتي.<span class='en-sub'>I know how to manage my emotions.</span>", "أفهم لغة المشاعر العميقة.<span class='en-sub'>I understand the language of deep feelings.</span>", "أنا شخص حساس وذكي.<span class='en-sub'>I am a sensitive and smart person.</span>", "أعرف كيف أتواصل بقلبي.<span class='en-sub'>I know how to communicate with my heart.</span>", "أنا متصالح مع ضعفي.<span class='en-sub'>I am at peace with my weakness.</span>", "أفهم تقلبات المزاج.<span class='en-sub'>I understand mood swings.</span>", "أنا شخص يحترم العاطفة.<span class='en-sub'>I am a person who respects emotion.</span>", "أعرف كيف أبني جسور الثقة.<span class='en-sub'>I know how to build bridges of trust.</span>", "أنا ذكي في فهم القلوب.<span class='en-sub'>I am smart in understanding hearts.</span>", "أعرف متى أتحدث ومتى أصمت.<span class='en-sub'>I know when to speak and when to be silent.</span>", "أنا شخص يقدر الصدق العاطفي.<span class='en-sub'>I am a person who values emotional honesty.</span>", "أعرف كيف أحمي قلبي.<span class='en-sub'>I know how to protect my heart.</span>", "أنا منفتح على مشاعر العالم.<span class='en-sub'>I am open to the world's feelings.</span>", "لدي قدرة على الاحتواء.<span class='en-sub'>I have a capacity for containment.</span>", "أنا شخص محب وعطوف.<span class='en-sub'>I am a loving and kind person.</span>", "أعرف كيف أدير خيبات الأمل.<span class='en-sub'>I know how to manage disappointments.</span>", "أنا ذكي في بناء الألفة.<span class='en-sub'>I am smart in building intimacy.</span>", "أفهم ما يحتاجه الآخر نفسياً.<span class='en-sub'>I understand what the other needs psychologically.</span>", "أنا شخص متوازن وجدانياً.<span class='en-sub'>I am emotionally balanced.</span>"],
-        15: ["أشعر بالقلق أحياناً.<span class='en-sub'>I feel anxious sometimes.</span>", "أجد صعوبة في النوم.<span class='en-sub'>I find it hard to sleep.</span>", "أفكر في الهموم كثيراً.<span class='en-sub'>I think about worries a lot.</span>", "أشعر بضيق في صدري.<span class='en-sub'>I feel tightness in my chest.</span>", "أفقد المتعة في الأشياء.<span class='en-sub'>I lose pleasure in things.</span>", "أميل للبكاء أحياناً.<span class='en-sub'>I tend to cry sometimes.</span>", "أشعر بالتعب المستمر.<span class='en-sub'>I feel constant tiredness.</span>", "أجد صعوبة في التركيز.<span class='en-sub'>I find it hard to focus.</span>", "أخاف من المستقبل.<span class='en-sub'>I fear the future.</span>", "أشعر أنني وحيد.<span class='en-sub'>I feel that I am alone.</span>", "أفكر في أخطائي كثيراً.<span class='en-sub'>I think about my mistakes a lot.</span>", "أشعر بالتوتر من الزحام.<span class='en-sub'>I feel stressed by crowds.</span>", "أجد صعوبة في اتخاذ القرار.<span class='en-sub'>I find it hard to make a decision.</span>", "أشعر أن الحياة صعبة.<span class='en-sub'>I feel that life is hard.</span>", "أميل للانعزال والوحدة.<span class='en-sub'>I tend to isolation and loneliness.</span>", "أشعر بضربات قلب سريعة.<span class='en-sub'>I feel fast heartbeats.</span>", "أفكر في كلام الناس عني.<span class='en-sub'>I think about what people say about me.</span>", "أشعر بالذنب بلا سبب.<span class='en-sub'>I feel guilty for no reason.</span>", "أجد صعوبة في الابتسام.<span class='en-sub'>I find it hard to smile.</span>", "أشعر بالخوف من المجهول.<span class='en-sub'>I feel fear of the unknown.</span>"],
-        16: ["أنا شخص مرهف الحس.<span class='en-sub'>I am a person of delicate feelings.</span>", "أتأثر بكلام الناس بسرعة.<span class='en-sub'>I am affected by people's words fast.</span>", "أحب الهدوء والسكينة.<span class='en-sub'>I love quiet and peace.</span>", "الأضواء العالية تزعجني.<span class='en-sub'>High lights disturb me.</span>", "أفهم تلميحات الناس فوراً.<span class='en-sub'>I understand people's hints immediately.</span>", "أشعر بآلام الآخرين.<span class='en-sub'>I feel others' pains.</span>", "أنا شخص دقيق الملاحظة.<span class='en-sub'>I am a person of precise observation.</span>", "أحب الطبيعة والهدوء.<span class='en-sub'>I love nature and quiet.</span>", "أتأثر بالأفلام والقصص.<span class='en-sub'>I am affected by movies and stories.</span>", "أنا شخص خيالي وحالم.<span class='en-sub'>I am an imaginative and dreamy person.</span>", "أحتاج لوقت طويل للراحة.<span class='en-sub'>I need a long time for rest.</span>", "أكره الأصوات الصاخبة.<span class='en-sub'>I hate loud noises.</span>", "أنا شخص عميق التفكير.<span class='en-sub'>I am a deep thinker.</span>", "أهتم بالتفاصيل الصغيرة.<span class='en-sub'>I care about small details.</span>", "أشعر بالتوتر من المفاجآت.<span class='en-sub'>I feel stressed by surprises.</span>", "أنا شخص يقدر الخصوصية.<span class='en-sub'>I am a person who values privacy.</span>", "أتأثر برائحة المكان.<span class='en-sub'>I am affected by the place's smell.</span>", "أنا شخص يلاحظ الجمال.<span class='en-sub'>I am a person who notices beauty.</span>", "أهتم بمشاعر الغرباء.<span class='en-sub'>I care about strangers' feelings.</span>", "أنا شخص رقيق التعامل.<span class='en-sub'>I am a person of gentle dealing.</span>"],
-        17: ["أشعر بضغط العمل المستمر.<span class='en-sub'>I feel constant work pressure.</span>", "لدي مسؤوليات كثيرة جداً.<span class='en-sub'>I have too many responsibilities.</span>", "أجد صعوبة في الاسترخاء.<span class='en-sub'>I find it hard to relax.</span>", "أشعر بالتوتر يومياً.<span class='en-sub'>I feel stressed daily.</span>", "أحتاج لساعات نوم أكثر.<span class='en-sub'>I need more sleep hours.</span>", "أفكر في المشاكل قبل النوم.<span class='en-sub'>I think about problems before sleep.</span>", "أشعر بضيق الوقت دائماً.<span class='en-sub'>I feel time pressure always.</span>", "أنا شخص سريع الانفعال.<span class='en-sub'>I am a person of fast emotion.</span>", "أشعر بالصداع أحياناً.<span class='en-sub'>I feel a headache sometimes.</span>", "أجد صعوبة في الهدوء.<span class='en-sub'>I find it hard to be calm.</span>", "أفكر في المهام المطلوبة.<span class='en-sub'>I think about required tasks.</span>", "أشعر بالإرهاق الذهني.<span class='en-sub'>I feel mental exhaustion.</span>", "أحتاج لإجازة طويلة.<span class='en-sub'>I need a long vacation.</span>", "أشعر أنني مراقب دائماً.<span class='en-sub'>I feel that I am always watched.</span>", "أجد صعوبة في التنفس بعمق.<span class='en-sub'>I find it hard to breathe deeply.</span>", "أنا شخص قلق بشأن النجاح.<span class='en-sub'>I am worried about success.</span>", "أشعر بتشنج في عضلاتي.<span class='en-sub'>I feel cramps in my muscles.</span>", "أفكر في المال والمستقبل.<span class='en-sub'>I think about money and the future.</span>", "أجد صعوبة في الاستمتاع.<span class='en-sub'>I find it hard to enjoy.</span>", "أنا شخص مثقل بالهموم.<span class='en-sub'>I am a person burdened with worries.</span>"],
-        18: ["أريد كل شيء أن يكون كاملاً.<span class='en-sub'>I want everything to be perfect.</span>", "أنتقد نفسي بشدة.<span class='en-sub'>I criticize myself strongly.</span>", "أكره الخطأ مهما كان صغيراً.<span class='en-sub'>I hate errors no matter how small.</span>", "أراجع عملي عدة مرات.<span class='en-sub'>I review my work several times.</span>", "أهتم بالترتيب الدقيق.<span class='en-sub'>I care about precise order.</span>", "أشعر بالضيق من الفوضى.<span class='en-sub'>I feel tightness from chaos.</span>", "أضع معايير عالية جداً.<span class='en-sub'>I set very high standards.</span>", "أحب اتباع القوانين بدقة.<span class='en-sub'>I like following laws precisely.</span>", "أشعر بالذنب إذا أخطأت.<span class='en-sub'>I feel guilty if I am wrong.</span>", "أنا شخص منظم جداً.<span class='en-sub'>I am a very organized person.</span>", "أهتم بالتفاصيل بشكل مفرط.<span class='en-sub'>I care about details excessively.</span>", "أريد إرضاء الجميع بعملي.<span class='en-sub'>I want to please everyone with my work.</span>", "أخاف من الفشل بشدة.<span class='en-sub'>I fear failure strongly.</span>", "أنا شخص دقيق في مواعيدي.<span class='en-sub'>I am a person of precise appointments.</span>", "أحب أن يكون كل شيء مثالياً.<span class='en-sub'>I love everything to be ideal.</span>", "أراجع كلامي قبل قوله.<span class='en-sub'>I review my words before saying them.</span>", "أنا شخص صلب في آرائي.<span class='en-sub'>I am a firm person in my opinions.</span>", "أهتم جداً بنظافة المكان.<span class='en-sub'>I care about place cleanliness a lot.</span>", "أجد صعوبة في مسامحة نفسي.<span class='en-sub'>I find it hard to forgive myself.</span>", "أطمح للكمال في كل شيء.<span class='en-sub'>I aspire to perfection in everything.</span>"],
-        19: ["أعرف كيف أقود الفريق.<span class='en-sub'>I know how to lead the team.</span>", "أثق في قدرتي على الإقناع.<span class='en-sub'>I trust my persuasion capacity.</span>", "أنا شخص مبادر وقيادي.<span class='en-sub'>I am a proactive and leading person.</span>", "أحب تحمل المسؤولية.<span class='en-sub'>I love taking responsibility.</span>", "أعرف كيف أدير الأزمات.<span class='en-sub'>I know how to manage crises.</span>", "أنا متحدث بارع ومؤثر.<span class='en-sub'>I am a gifted and influential speaker.</span>", "أحب وضع الخطط الكبيرة.<span class='en-sub'>I love setting big plans.</span>", "أنا شخص ملهم لمن حولي.<span class='en-sub'>I am an inspiration to those around me.</span>", "أعرف كيف أكسب الولاء.<span class='en-sub'>I know how to earn loyalty.</span>", "أنا سريع في اتخاذ القرار.<span class='en-sub'>I am fast at making decisions.</span>", "أحب تنظيم المشاريع.<span class='en-sub'>I love project organization.</span>", "أنا شخص واثق من كلمته.<span class='en-sub'>I am a person of confident words.</span>", "أعرف كيف أوجه الآخرين.<span class='en-sub'>I know how to direct others.</span>", "أنا شخص صبور مع الفريق.<span class='en-sub'>I am a patient person with the team.</span>", "أحب تحقيق الأهداف الجماعية.<span class='en-sub'>I love achieving group goals.</span>", "أنا شخص عادل في حكمي.<span class='en-sub'>I am a fair person in my judgment.</span>", "أعرف كيف أحفز الناس.<span class='en-sub'>I know how to motivate people.</span>", "أنا شخص يمتلك رؤية.<span class='en-sub'>I am a person who has a vision.</span>", "أحب النجاح الجماعي.<span class='en-sub'>I love group success.</span>", "أنا شخص يقدر العمل الجاد.<span class='en-sub'>I am a person who values hard work.</span>"]
+        15: ["أشعر بالقلق أحياناً.<span class='en-sub'>I feel anxious sometimes.</span>"]
     };
 
-    const quizzes = [
-        {ar: "الخمسة الكبرى", en: "Big Five Personality", em: "🧠", type: "personality"},
-        {ar: "أنماط مايرز", en: "MBTI Profile", em: "👤", type: "personality"},
-        {ar: "الأنماط التسعة", en: "Enneagram", em: "🔍", type: "personality"},
-        {ar: "نقاط القوة", en: "Strengths", em: "💪", type: "growth"},
-        {ar: "الشخصية الشائعة", en: "Common Traits", em: "🌟", type: "personality"},
-        {ar: "المسار المهني", en: "Career Path", em: "💼", type: "career"},
-        {ar: "التفكير النقدي", en: "Critical Thinking", em: "🧐", type: "logic"},
-        {ar: "التفاعل الاجتماعي", en: "Social Interaction", em: "🤝", type: "social"},
-        {ar: "قبول الذات", en: "Self-Acceptance", em: "❤️", type: "growth"},
-        {ar: "المعتقدات", en: "Beliefs", em: "💭", type: "logic"},
-        {ar: "مقياس الذكاء", en: "IQ Scale", em: "🎓", type: "iq"},
-        {ar: "المصفوفات", en: "Matrices", em: "🧩", type: "iq"},
-        {ar: "الذكاء السريع", en: "Fast Intelligence", em: "⚡", type: "iq"},
-        {ar: "الذكاء العاطفي", en: "Emotional (EQ)", em: "🎭", type: "social"},
-        {ar: "الذكاء الانفعالي", en: "Berkeley Test", em: "🌈", type: "social"},
-        {ar: "القلق", en: "Anxiety", em: "📉", type: "clinical"},
-        {ar: "الحساسية النفسية", en: "Sensitivity", em: "🍃", type: "clinical"},
-        {ar: "التوتر", en: "Stress Level", em: "💥", type: "clinical"},
-        {ar: "الكمالية", en: "Perfectionism", em: "📏", type: "personality"},
-        {ar: "القيادة", en: "Leadership", em: "📢", type: "career"}
-    ];
+    // بقية أكواد المنطق الخاص بالاختبار (startQuiz, next, prev, showResult...)
+    const quizTitles = ["تحليل الشخصية الشامل (Big Five)", "اختبار نوع الشخصية (MBTI)", "تحليل الأنماط التسعة (Enneagram)", "مستوى تقدير الذات والتطوير", "تحليل السلوك والمهارات", "التوجيه المهني والوظيفة", "التفكير المنطقي والنقدي", "الذكاء الاجتماعي والذكاء العاطفي", "مستوى الثقة بالنفس", "اختبار التفكير الإيجابي", "اختبار الذكاء العام (General IQ)", "اختبار الذكاء البصري والمكاني", "اختبار سرعة البديهة والذكاء", "الذكاء العاطفي المتقدم", "تحليل القوة الوجدانية", "مستوى التوتر والقلق"];
+    let currentQuiz = 0, currentQ = 0, answers = [], userAnswers = [];
 
-    let qIndex = 0; let selectedQuiz = 0; let answers = new Array(20).fill(null); let username = "";
+    const menu = document.getElementById('menu');
+    quizTitles.forEach((t, i) => {
+        let card = document.createElement('div');
+        card.className = 'quiz-card';
+        card.innerHTML = `<span>${t}</span> <span>➔</span>`;
+        card.onclick = () => selectQuiz(i);
+        menu.appendChild(card);
+    });
 
-    function initMenu() {
-        const menu = document.getElementById('menu'); menu.innerHTML = "";
-        quizzes.forEach((q, i) => {
-            const div = document.createElement('div'); div.className = 'quiz-card';
-            div.innerHTML = `<div>${i+1}. ${q.ar} | <small>${q.en}</small></div><span>${q.em}</span>`;
-            div.onclick = () => { selectedQuiz = i; document.getElementById('home-screen').style.display = 'none'; document.getElementById('input-screen').style.display = 'block'; document.getElementById('chosen-title').innerText = q.ar + " | " + q.en; loadAds(); };
-            menu.appendChild(div);
-        });
+    function selectQuiz(i) {
+        currentQuiz = i;
+        document.getElementById('home-screen').style.display = 'none';
+        document.getElementById('input-screen').style.display = 'block';
+        document.getElementById('chosen-title').innerText = quizTitles[i];
     }
 
     function startQuiz() {
-        username = document.getElementById('username').value; 
-        if(!username) return alert("المرجو إدخال الاسم | Please enter your name");
-        document.getElementById('input-screen').style.display = 'none'; document.getElementById('quiz-screen').style.display = 'block';
-        qIndex = 0; answers.fill(null); loadQuestion();
+        if (!document.getElementById('username').value) return alert("الرجاء كتابة الاسم!");
+        document.getElementById('input-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+        currentQ = 0;
+        userAnswers = new Array(20).fill(null);
+        showQuestion();
     }
 
-    function loadQuestion() {
-        document.getElementById('q-num').innerText = qIndex + 1;
-        document.getElementById('q-text').innerHTML = questionsBank[selectedQuiz][qIndex];
-        const opts = document.getElementsByName('opt');
-        opts.forEach(o => o.checked = (answers[qIndex] !== null && o.value == answers[qIndex]));
-        document.getElementById('prev-btn').disabled = (qIndex === 0);
-        document.getElementById('next-btn').innerText = (qIndex === 19) ? "إنهاء | Finish" : "التالي | Next";
+    function showQuestion() {
+        document.getElementById('q-text').innerHTML = questionsBank[currentQuiz][currentQ];
+        document.getElementById('q-num').innerText = currentQ + 1;
+        let opts = document.getElementsByName('opt');
+        opts.forEach(o => {
+            o.checked = (userAnswers[currentQ] == o.value);
+        });
+        document.getElementById('prev-btn').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+        document.getElementById('next-btn').innerText = currentQ === 19 ? "إنهاء | Finish" : "التالي | Next";
     }
 
     function next() {
-        const opts = document.getElementsByName('opt'); let val = null;
-        opts.forEach(o => { if(o.checked) val = parseInt(o.value); });
-        if(val === null) return alert("المرجو اختيار إجابة | Please select an answer");
-        answers[qIndex] = val;
-        if(qIndex < 19) { qIndex++; loadQuestion(); }
-        else { document.getElementById('quiz-screen').style.display = 'none'; document.getElementById('pre-result').style.display = 'block'; document.getElementById('res-btn').innerText = `رؤية النتيجة يا ${username} | View Result`; }
+        let selected = document.querySelector('input[name="opt"]:checked');
+        if (!selected) return alert("الرجاء اختيار إجابة!");
+        userAnswers[currentQ] = selected.value;
+        if (currentQ < 19) {
+            currentQ++;
+            showQuestion();
+        } else {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('pre-result').style.display = 'block';
+            document.getElementById('res-btn').innerText = `عرض نتيجة ${document.getElementById('username').value}`;
+        }
     }
 
-    function prev() { if(qIndex > 0) { qIndex--; loadQuestion(); } }
+    function prev() {
+        if (currentQ > 0) {
+            currentQ--;
+            showQuestion();
+        }
+    }
 
     function showResult() {
-        window.open(myAdLink, '_blank');
-        document.getElementById('pre-result').style.display = 'none'; document.getElementById('result-screen').style.display = 'block';
-        const total = answers.reduce((a, b) => a + (b || 0), 0); const p = Math.round((total/40)*100);
-        document.getElementById('score-text').innerText = p + "%";
+        document.getElementById('pre-result').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        let total = userAnswers.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+        let percent = Math.round((total / 40) * 100);
+        document.getElementById('score-text').innerText = percent + "%";
         
-        let d = "";
-        if(p > 70) {
-            d = `<b>يا ${username}، نتيجتك استثنائية جداً وملهمة! ✨🚀 | Your result is exceptional and inspiring!</b><br><br>
-            أنت تمتلك شخصية قوية وواثقة جداً، وتعرف جيداً كيف تدير حياتك بذكاء وحكمة بالغة. لديك كاريزما طبيعية تجذب الناس إليك وتجعلهم يثقون في آرائك 💎👑<br>
-            <span class='en-sub'>You have a strong and very confident personality, and you know well how to manage your life with intelligence and wisdom. You have a natural charisma.</span><br><br>
-            هذا التوازن العالي بين العقل والعاطفة يجعلك شخصاً متميزاً في أي مجال تدخله، ولديك إرادة قوية قادرة على تحطيم الصعاب وتحقيق المستحيل 🏆🔥<br>
-            <span class='en-sub'>This high balance between mind and emotion makes you a distinguished person in any field you enter, with a strong will capable of achieving the impossible.</span>`;
-        } else {
-            d = `<b>يا ${username}، أنت شخص متوازن، واقعي وحكيم ⚖️🌿 | You are a balanced, realistic, and wise person</b><br><br>
-            لديك نظرة عميقة للأمور وتعرف كيف تتكيف مع التحديات اليومية بهدوء وذكاء منقطع النظير. أنت لا تتسرع في قراراتك وتفضل دائماً التفكير قبل الفعل 🧠✨<br>
-            <span class='en-sub'>You have a deep outlook on things and know how to adapt to daily challenges with unmatched calm and intelligence. You don't rush your decisions.</span><br><br>
-            قدرتك على فهم ذاتك بصدق هي أعظم ميزة ستقودك للنجاح المستمر. أنت شخص يعتمد عليه وصادق في مشاعرك، وهذا ما يجعلك محبوباً في محيطك 😊 رائع جداً!<br>
-            <span class='en-sub'>Your ability to understand yourself honestly is your greatest asset for success. You are a reliable person and honest in your feelings.</span>`;
-        }
-        document.getElementById('result-desc').innerHTML = d;
+        let desc = "";
+        if (percent > 80) desc = "مذهل! أنت تمتلك صفات استثنائية في هذا الجانب. شخصيتك قوية وواعية جداً.";
+        else if (percent > 50) desc = "جيد جداً! لديك توازن ممتاز وقدرات جيدة تحتاج فقط لبعض التطوير البسيط.";
+        else desc = "تحتاج للعمل على تطوير نفسك في هذا الجانب. لا تقلق، الاعتراف بالبداية هو أول خطوات النجاح.";
+        
+        document.getElementById('result-desc').innerHTML = `<strong>${document.getElementById('username').value}</strong>، نتيجتك هي <strong>${percent}%</strong>. <br>${desc}`;
     }
 
     function shareOnWhatsApp() {
-        const score = document.getElementById('score-text').innerText;
-        const text = `🔥 واعر بزااف! أنا جربت اختبار "${quizzes[selectedQuiz].ar}" وطلعت النتيجة ديالي هي ${score}. \nجرب حظك واكتشف شخصيتك من هنا: \n`;
-        const url = window.location.href; window.open(`https://wa.me/?text=${encodeURIComponent(text + url)}`, '_blank');
+        let text = `اختبرت نفسي في "${quizTitles[currentQuiz]}" وحصلت على ${document.getElementById('score-text').innerText}! جرب الاختبار أنت أيضاً: ${window.location.href}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     }
-    initMenu();
 </script>
+
+<script data-goatcounter="https://man-ana.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
 </body>
 </html>
