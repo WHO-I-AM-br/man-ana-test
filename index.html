@@ -10,22 +10,17 @@
     <style>
         :root { --bg: #7a5c91; --card-bg: #4a345a; --accent: #d4a5ff; --text-p: #ffffff; --text-s: #e0d0eb; --btn: #967bb6; }
         .dark-mode { --bg: #0f0f0f; --card-bg: #1a1a1a; --accent: #00d2ff; --text-p: #ffffff; --text-s: #888888; --btn: #333333; }
-        
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text-p); transition: 0.5s; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         .container { width: 90%; max-width: 850px; background: var(--card-bg); padding: 35px; border-radius: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); text-align: center; position: relative; }
         .theme-toggle { position: absolute; top: 15px; left: 15px; cursor: pointer; background: var(--accent); color: #2e1a3d; padding: 8px 12px; border-radius: 15px; font-weight: bold; font-size: 0.75rem; }
-        
         h1 { font-size: 2.2rem; color: var(--accent); margin-bottom: 5px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 25px; }
         .quiz-card { background: rgba(255,255,255,0.08); padding: 18px; border-radius: 15px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
         .quiz-card:hover { background: var(--btn); transform: scale(1.03); }
-        
         .option-btn { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 15px; margin: 10px 0; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
         .option-btn:hover { border-color: var(--accent); }
-        
         input { width: 90%; padding: 15px; border-radius: 10px; border: 2px solid var(--accent); background: transparent; color: #fff; text-align: center; font-size: 1.1rem; margin-bottom: 10px; }
         button { background: var(--accent); color: #2e1a3d; border: none; padding: 12px 35px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        
         .analysis-text { text-align: right; line-height: 1.7; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin-top: 20px; font-size: 1rem; }
         .emoji-big { font-size: 3rem; margin-bottom: 10px; }
     </style>
@@ -40,14 +35,12 @@
         <p style="color:var(--text-s)">Discover your true personality | 10 Deep Tests</p>
         <div class="grid" id="menu"></div>
     </div>
-
     <div id="scr-name" style="display:none;">
         <h2 id="quiz-name-display" style="color:var(--accent)"></h2>
         <input type="text" id="uname" placeholder="اسمك | Your Name">
         <br>
         <button onclick="start()">LET'S GO | ابـدأ 🚀</button>
     </div>
-
     <div id="scr-quiz" style="display:none;">
         <h3 id="q-ar"></h3>
         <p id="q-en" style="color:var(--text-s); opacity:0.8;"></p>
@@ -57,7 +50,6 @@
             <div class="option-btn" onclick="answer(2)"><span>نعم | Yes</span><span>✅</span></div>
         </div>
     </div>
-
     <div id="scr-res" style="display:none;">
         <div class="emoji-big" id="res-emoji"></div>
         <h2 id="res-who"></h2>
@@ -70,86 +62,28 @@
 
 <script>
 const adsterraDirectLink = "https://www.profitablecpmgate.com/29173516"; 
-
 const data = [
-    {t:["الذكاء العاطفي","Emotional Intelligence"], qs:[{ar:"هل تتحكم في ردود فعلك عند الغضب؟", en:"Control reactions when angry?"},{ar:"هل تفهم مشاعر الآخرين دون كلام؟", en:"Sense others' emotions?"},{ar:"هل تتقبل النقد بصدر رحب؟", en:"Accept criticism openly?"},{ar:"هل تشعر بالتعاطف مع الغرباء؟", en:"Empathy for strangers?"},{ar:"هل توازن بين العقل والعاطفة؟", en:"Balance logic and emotion?"},{ar:"هل تعتذر عندما تخطئ؟", en:"Apologize when wrong?"},{ar:"هل تثق في حدسك العاطفي؟", en:"Trust emotional intuition?"},{ar:"هل تساعد الآخرين في حل مشاكلهم؟", en:"Help others solve problems?"},{ar:"هل تدرك تأثير كلامك على الناس؟", en:"Aware of your words' impact?"},{ar:"هل تجيد التعبير عن مشاعرك؟", en:"Expressing your feelings?"}]},
-    {t:["الثقة بالنفس","Self Confidence"], qs:[{ar:"هل تثق في قراراتك دون تردد؟", en:"Trust decisions?"},{ar:"هل تحب مظهرك كما هو؟", en:"Like appearance?"},{ar:"هل تواجه الخوف بشجاعة؟", en:"Face fear with courage?"},{ar:"هل تتوقف عن لوم نفسك؟", en:"Stop blaming yourself?"},{ar:"هل تشعر أنك تستحق الأفضل؟", en:"Feel you deserve the best?"},{ar:"هل تعبر عن رأيك بوضوح؟", en:"Express opinion clearly?"},{ar:"هل تتقبل الفشل كبداية؟", en:"Accept failure?"},{ar:"هل أنت راضٍ عن إنجازاتك؟", en:"Satisfied with achievements?"},{ar:"هل تتجاهل تعليقات المحبطين؟", en:"Ignore negative comments?"},{ar:"هل تؤمن بقدرتك على التغيير؟", en:"Ability to change?"}]},
-    {t:["القلق الداخلي","Inner Anxiety"], qs:[{ar:"هل تفكر كثيراً في المستقبل؟", en:"Overthink the future?"},{ar:"هل تجد صعوبة في النوم؟", en:"Hard to sleep?"},{ar:"هل تخشى من وقوع كارثة؟", en:"Fear a disaster?"},{ar:"هل تشعر بالتوتر في الزحام؟", en:"Tense in crowds?"},{ar:"هل تحلل كلام الناس بدقة؟", en:"Analyze people's words?"},{ar:"هل تشعر بضيق في التنفس؟", en:"Shortness of breath?"},{ar:"هل تخاف من الفشل الاجتماعي؟", en:"Fear social failure?"},{ar:"هل أنت سريع القلق من الأخبار؟", en:"Worry about news?"},{ar:"هل تشعر أن الوقت يداهمك؟", en:"Time is running out?"},{ar:"هل تحتاج للتأكد من الأمور مراراً؟", en:"Double-check often?"}]},
-    {t:["القيادة","Leadership"], qs:[{ar:"هل تحب قيادة فريق العمل؟", en:"Leading a team?"},{ar:"هل تتخذ القرارات في الأزمات؟", en:"Decisions in crises?"},{ar:"هل يطلب الناس نصيحتك؟", en:"Ask for your advice?"},{ar:"هل تتحمل مسؤولية أخطائك؟", en:"Responsibility for errors?"},{ar:"هل تجيد تنظيم الوقت؟", en:"Time management?"},{ar:"هل تلهم الآخرين للأفضل؟", en:"Inspire others?"},{ar:"هل تضع خططاً واضحة؟", en:"Set clear plans?"},{ar:"هل أنت شخص حاسم؟", en:"Decisive person?"},{ar:"هل تهتم بمصلحة الجماعة؟", en:"Group's interest?"},{ar:"هل تلتزم بالمواعيد؟", en:"Stick to deadlines?"}]},
-    {t:["الإبداع","Creativity"], qs:[{ar:"هل ترى حلولاً مبتكرة للمشاكل؟", en:"Innovative solutions?"},{ar:"هل خيالك واسع جداً؟", en:"Vivid imagination?"},{ar:"هل تحب الفنون أو الرسم؟", en:"Love arts or drawing?"},{ar:"هل تكره الروتين الممل؟", en:"Hate boring routine?"},{ar:"هل تغير ديكور غرفتك دائماً؟", en:"Change decor?"},{ar:"هل تحب المغامرة والتجربة؟", en:"Adventure and testing?"},{ar:"هل تفكر خارج الصندوق؟", en:"Outside the box?"},{ar:"هل تجيد الكتابة أو التأليف؟", en:"Writing or composing?"},{ar:"هل تلاحظ الجمال في البساطة؟", en:"Beauty in simplicity?"},{ar:"هل تبتكر طرقاً جديدة؟", en:"Invent new ways?"}]},
-    {t:["الطموح","Ambition"], qs:[{ar:"هل تسعى لمنصب عالٍ؟", en:"Seek a high position?"},{ar:"هل تعمل أكثر من المطلوب؟", en:"Work more than required?"},{ar:"هل تضع أهدافاً للمستقبل؟", en:"Set goals?"},{ar:"هل تحب المنافسة القوية؟", en:"Strong competition?"},{ar:"هل تقرأ لتطوير ذاتك؟", en:"Self-improvement books?"},{ar:"هل تحلم بالثراء والنجاح؟", en:"Wealth and success?"},{ar:"هل ترفض الاستسلام؟", en:"Refuse to give up?"},{ar:"هل تبحث دائماً عن فرص؟", en:"Looking for opportunities?"},{ar:"هل تستثمر في مهاراتك؟", en:"Invest in your skills?"},{ar:"هل تريد ترك بصمة؟", en:"Leave a mark?"}]},
-    {t:["التركيز","Mental Focus"], qs:[{ar:"هل تنهي مهامك دون تشتت؟", en:"Without distraction?"},{ar:"هل تتذكر الأسماء والوجوه؟", en:"Remember names/faces?"},{ar:"هل تستطيع القراءة لساعات؟", en:"Read for hours?"},{ar:"هل تلاحظ التغييرات البسيطة؟", en:"Minor changes?"},{ar:"هل تركز في التفاصيل؟", en:"Focus on tiny details?"},{ar:"هل تجيد الحسابات الذهنية؟", en:"Mental math?"},{ar:"هل عقلك حاضر دائماً؟", en:"Mind present?"},{ar:"هل تبتعد عن الملهيات؟", en:"Stay away from distractions?"},{ar:"هل تتبع جدولاً يومياً؟", en:"Daily schedule?"},{ar:"هل تفكيرك منظم؟", en:"Thinking is organized?"}]},
-    {t:["تقدير الذات","Self-Worth"], qs:[{ar:"هل تسامح نفسك؟", en:"Forgive yourself?"},{ar:"هل تقول 'لا' دون خجل؟", en:"Say 'no' without shame?"},{ar:"هل تهتم بصحتك النفسية؟", en:"Mental health?"},{ar:"هل أنت صديق لنفسك؟", en:"Friend to yourself?"},{ar:"هل ترفض العلاقات السامة؟", en:"Reject toxic?"},{ar:"هل تدلل نفسك بالمكافآت؟", en:"Rewards?"},{ar:"هل ترى نفسك كشخص مميز؟", en:"Unique person?"},{ar:"هل ترفض الإهانة؟", en:"Refuse insults?"},{ar:"هل تفتخر بماضيك؟", en:"Proud of your past?"},{ar:"هل تثق في قيمتك؟", en:"Trust your worth?"}]},
-    {t:["التفكير العميق","Deep Thinking"], qs:[{ar:"هل تحلل أسباب الأحداث؟", en:"Analyze reasons?"},{ar:"هل تحب الفلسفة؟", en:"Philosophy?"},{ar:"هل تطرح أسئلة صعبة؟", en:"Difficult questions?"},{ar:"هل تبحث عن الحقيقة؟", en:"Search for truth?"},{ar:"هل تفهم المعاني المخفية؟", en:"Hidden meanings?"},{ar:"هل تحب الهدوء للتفكير؟", en:"Quietness for thinking?"},{ar:"هل ترى الأمور بزوايا مختلفة؟", en:"Different angles?"},{ar:"هل تشكك في المسلمات؟", en:"Doubt common facts?"},{ar:"هل تهتم بجوهر الأشياء؟", en:"Essence of things?"},{ar:"هل تخطط للمدى البعيد؟", en:"Long term plans?"}]},
-    {t:["الاجتماعية","Social Personality"], qs:[{ar:"هل تستمتع بالحفلات؟", en:"Enjoy parties?"},{ar:"هل تبدأ المحادثات؟", en:"Start talks?"},{ar:"هل لديك أصدقاء كثيرون؟", en:"Many friends?"},{ar:"هل تجيد العمل الجماعي؟", en:"Teamwork?"},{ar:"هل أنت مستمع جيد؟", en:"Good listener?"},{ar:"هل تشعر بالراحة في الزحام؟", en:"Comfortable in crowds?"},{ar:"هل يحب الناس التحدث معك؟", en:"People like talking to you?"},{ar:"هل تجامل الناس بصدق؟", en:"Compliment people?"},{ar:"هل تندمج بسرعة؟", en:"Blend quickly?"},{ar:"هل تكره الوحدة؟", en:"Hate long loneliness?"}]}
+    {t:["الذكاء العاطفي","Emotional EQ"], qs:[{ar:"هل تتحكم في غضبك؟",en:"Control anger?"},{ar:"تفهم مشاعر الغير؟",en:"Sense others?"},{ar:"تتقبل النقد؟",en:"Accept feedback?"},{ar:"تتعاطف مع الغرباء؟",en:"Empathy?"},{ar:"توازن عقلك وقلبك؟",en:"Logic vs Heart?"},{ar:"تعتذر عند الخطأ؟",en:"Apologize?"},{ar:"تثق بحدسك؟",en:"Trust intuition?"},{ar:"تساعد الآخرين؟",en:"Help others?"},{ar:"تدرك أثر كلامك؟",en:"Word impact?"},{ar:"تعبر عن مشاعرك؟",en:"Express feelings?"}]},
+    {t:["الثقة بالنفس","Self Confidence"], qs:[{ar:"تثق بقراراتك؟",en:"Trust decisions?"},{ar:"تحب مظهرك؟",en:"Like look?"},{ar:"تواجه الخوف؟",en:"Face fear?"},{ar:"تتوقف عن لوم نفسك؟",en:"Stop self-blame?"},{ar:"تستحق الأفضل؟",en:"Deserve best?"},{ar:"تعبر عن رأيك؟",en:"Speak mind?"},{ar:"تتقبل الفشل؟",en:"Accept failure?"},{ar:"راضٍ عن نجاحك؟",en:"Satisfied?"},{ar:"تتجاهل المحبطين؟",en:"Ignore haters?"},{ar:"تؤمن بالتغيير؟",en:"Believe in change?"}]},
+    {t:["القلق","Anxiety"], qs:[{ar:"تفكّر في المستقبل؟",en:"Think future?"},{ar:"تجد صعوبة في النوم؟",en:"Hard to sleep?"},{ar:"تخشى الكوارث؟",en:"Fear disaster?"},{ar:"تتوتر في الزحام؟",en:"Crowd stress?"},{ar:"تحلل كلام الناس؟",en:"Analyze words?"},{ar:"ضيق في التنفس؟",en:"Short breath?"},{ar:"تخاف الفشل؟",en:"Fear failure?"},{ar:"تقلق من الأخبار؟",en:"News worry?"},{ar:"الوقت يداهمك؟",en:"Time running out?"},{ar:"تتأكد من الأمور؟",en:"Double check?"}]},
+    {t:["القيادة","Leadership"], qs:[{ar:"تحب قيادة الفريق؟",en:"Lead team?"},{ar:"تقرر في الأزمات؟",en:"Decide in crisis?"},{ar:"يطلبون نصيحتك؟",en:"Advice asked?"},{ar:"تتحمل الخطأ؟",en:"Take blame?"},{ar:"تنظم وقتك؟",en:"Manage time?"},{ar:"تلهم الآخرين؟",en:"Inspire?"},{ar:"تضع خططاً؟",en:"Set plans?"},{ar:"أنت حاسم؟",en:"Decisive?"},{ar:"تهتم بالجميع؟",en:"Care for all?"},{ar:"تلتزم بالمواعيد؟",en:"Deadlines?"}]},
+    {t:["الإبداع","Creativity"], qs:[{ar:"تجد حلولاً غريبة؟",en:"Odd solutions?"},{ar:"خيالك واسع؟",en:"Imagination?"},{ar:"تحب الفنون؟",en:"Love art?"},{ar:"تكره الروتين؟",en:"Hate routine?"},{ar:"تغير ديكورك؟",en:"Change decor?"},{ar:"تحب المغامرة؟",en:"Adventure?"},{ar:"تفكر خارج الصندوق؟",en:"Outside box?"},{ar:"تجيد التأليف؟",en:"Writing?"},{ar:"تلاحظ الجمال؟",en:"Notice beauty?"},{ar:"تبتكر دائماً؟",en:"Innovate?"}]},
+    {t:["الطموح","Ambition"], qs:[{ar:"تريد منصباً عالياً؟",en:"High position?"},{ar:"تعمل بجهد؟",en:"Work hard?"},{ar:"تضع أهدافاً؟",en:"Set goals?"},{ar:"تحب المنافسة؟",en:"Competition?"},{ar:"تطور ذاتك؟",en:"Self growth?"},{ar:"تحلم بالثراء؟",en:"Dream big?"},{ar:"لا تستسلم؟",en:"Never give up?"},{ar:"تبحث عن فرص؟",en:"Seek chances?"},{ar:"تستثمر في نفسك؟",en:"Invest in self?"},{ar:"تريد ترك بصمة؟",en:"Leave a mark?"}]},
+    {t:["التركيز","Mental Focus"], qs:[{ar:"تنهي مهامك؟",en:"Finish tasks?"},{ar:"تتذكر الوجوه؟",en:"Remember faces?"},{ar:"تقرأ لساعات؟",en:"Read hours?"},{ar:"تلاحظ التغيير؟",en:"Notice change?"},{ar:"تهتم بالتفاصيل؟",en:"Details?"},{ar:"حساب ذهني سريع؟",en:"Mental math?"},{ar:"عقلك حاضر؟",en:"Mind present?"},{ar:"تتجنب الملهيات؟",en:"No distraction?"},{ar:"تتبع جدولاً؟",en:"Follow schedule?"},{ar:"تفكيرك منظم؟",en:"Organized?"}]},
+    {t:["تقدير الذات","Self-Worth"], qs:[{ar:"تسامح نفسك؟",en:"Forgive self?"},{ar:"تقول لا؟",en:"Say no?"},{ar:"تهتم بصحتك؟",en:"Health care?"},{ar:"أنت صديق لنفسك؟",en:"Friend to self?"},{ar:"ترفض السلبية؟",en:"Reject toxic?"},{ar:"تكافئ نفسك؟",en:"Reward self?"},{ar:"أنت مميز؟",en:"Unique?"},{ar:"ترفض الإهانة؟",en:"Reject insult?"},{ar:"تفتخر بماضيك؟",en:"Proud of past?"},{ar:"تثق بقيمتك؟",en:"Trust worth?"}]},
+    {t:["التفكير العميق","Deep Thinking"], qs:[{ar:"تحلل الأحداث؟",en:"Analyze events?"},{ar:"تحب الفلسفة؟",en:"Philosophy?"},{ar:"تسأل أسئلة صعبة؟",en:"Hard questions?"},{ar:"تبحث عن الحقيقة؟",en:"Seek truth?"},{ar:"تفهم المعاني؟",en:"Understand meaning?"},{ar:"تحب الهدوء؟",en:"Love quiet?"},{ar:"تغير زوايا نظرك؟",en:"Different angles?"},{ar:"تشك في المسلمات؟",en:"Doubt facts?"},{ar:"تهتم بالجوهر؟",en:"Essence?"},{ar:"تخطط للمدى البعيد؟",en:"Long term?"}]},
+    {t:["الاجتماعية","Social"], qs:[{ar:"تحب الحفلات؟",en:"Love parties?"},{ar:"تبدأ الكلام؟",en:"Start talk?"},{ar:"لديك أصدقاء؟",en:"Many friends?"},{ar:"تجيد العمل الجماعي؟",en:"Teamwork?"},{ar:"أنت مستمع؟",en:"Good listener?"},{ar:"ترتاح في الزحام؟",en:"Crowd comfort?"},{ar:"يحبون الكلام معك؟",en:"People like you?"},{ar:"تجامل بصدق؟",en:"Sincere?"},{ar:"تندمج بسرعة؟",en:"Blend fast?"},{ar:"تكره الوحدة؟",en:"Hate loneliness?"}]}
 ];
 
 let curQ = 0, curQuiz = 0, score = 0, name = "";
-
-function init() {
-    const m = document.getElementById('menu');
-    m.innerHTML = "";
-    data.forEach((q, i) => {
-        m.innerHTML += `<div class="quiz-card" onclick="openName(${i})"><b>${q.t[0]}</b><br><small>${q.t[1]}</small></div>`;
-    });
-}
-
-function openName(i) {
-    curQuiz = i;
-    document.getElementById('scr-home').style.display = 'none';
-    document.getElementById('scr-name').style.display = 'block';
-    document.getElementById('quiz-name-display').innerText = data[i].t[0];
-}
-
-function start() {
-    name = document.getElementById('uname').value;
-    if(!name) return alert("Enter Name Please!");
-    document.getElementById('scr-name').style.display = 'none';
-    document.getElementById('scr-quiz').style.display = 'block';
-    curQ = 0; score = 0;
-    load();
-}
-
-function load() {
-    const q = data[curQuiz].qs[curQ];
-    document.getElementById('q-ar').innerText = q.ar;
-    document.getElementById('q-en').innerText = q.en;
-}
-
-function answer(v) {
-    score += v;
-    if(curQ < 9) { 
-        curQ++; 
-        load(); 
-    } else { 
-        window.open(adsterraDirectLink, '_blank');
-        results(); 
-    }
-}
-
-function results() {
-    document.getElementById('scr-quiz').style.display = 'none';
-    document.getElementById('scr-res').style.display = 'block';
-    let p = Math.round((score / 20) * 100);
-    document.getElementById('res-perc').innerText = p + "%";
-    document.getElementById('res-who').innerText = `يا ${name}، إليك تحليلك النهائي:`;
-    
-    let d = "", em = "";
-    if(p > 80) { em = "🔥👑"; d = "<b>تحليل استثنائي:</b> أنت تمتلك قوة هائلة في هذا الجانب! شخصيتك نموذجية وتلهم الآخرين."; }
-    else if(p > 40) { em = "⚖️✨"; d = "<b>تحليل متوازن:</b> لديك وعي جيد جداً ولكن هناك بعض التردد. أنت في الطريق الصحيح."; }
-    else { em = "⚠️🧱"; d = "<b>تحليل للمراجعة:</b> هذا الجانب يحتاج لتطوير جاد. لا تقلق، الاعتراف هو أول خطوة للنجاح."; }
-    
-    document.getElementById('res-desc').innerHTML = d;
-    document.getElementById('res-emoji').innerText = em;
-}
-
+function init() { const m = document.getElementById('menu'); m.innerHTML = ""; data.forEach((q, i) => { m.innerHTML += `<div class="quiz-card" onclick="openName(${i})"><b>${q.t[0]}</b><br><small>${q.t[1]}</small></div>`; }); }
+function openName(i) { curQuiz = i; document.getElementById('scr-home').style.display = 'none'; document.getElementById('scr-name').style.display = 'block'; document.getElementById('quiz-name-display').innerText = data[i].t[0]; }
+function start() { name = document.getElementById('uname').value; if(!name) return alert("Enter Name!"); document.getElementById('scr-name').style.display = 'none'; document.getElementById('scr-quiz').style.display = 'block'; curQ = 0; score = 0; load(); }
+function load() { const q = data[curQuiz].qs[curQ]; document.getElementById('q-ar').innerText = q.ar; document.getElementById('q-en').innerText = q.en; }
+function answer(v) { score += v; if(curQ < 9) { curQ++; load(); } else { window.open(adsterraDirectLink, '_blank'); results(); } }
+function results() { document.getElementById('scr-quiz').style.display = 'none'; document.getElementById('scr-res').style.display = 'block'; let p = Math.round((score / 20) * 100); document.getElementById('res-perc').innerText = p + "%"; document.getElementById('res-who').innerText = `تحليل ${name}:`; let d = "", em = ""; if(p > 80) { em = "🔥👑"; d = "<b>تحليل استثنائي!</b> أنت ملهم وقوي جداً."; } else if(p > 40) { em = "⚖️🌱"; d = "<b>تحليل متوازن!</b> أنت في الطريق الصحيح."; } else { em = "⚠️🧱"; d = "<b>تحليل للتطوير!</b> ابدأ العمل على نفسك الآن."; } document.getElementById('res-desc').innerHTML = d; document.getElementById('res-emoji').innerText = em; }
 function toggleTheme() { document.body.classList.toggle('dark-mode'); }
-
-function shareWA() {
-    const text = `🔥 واعر بزااف! جربت اختبار "${data[curQuiz].t[0]}" وطلعت النتيجة ديالي هي ${document.getElementById('res-perc').innerText}. جرب حتى أنت هنا: ${window.location.href}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-}
-
+function shareWA() { const text = `🔥 أنا جربت اختبار "${data[curQuiz].t[0]}" وطلعت النتيجة ديالي هي ${document.getElementById('res-perc').innerText}. جرب حتى أنت هنا: ${window.location.href}`; window.open(`https://wa.me/?text=${encodeURIComponent(text)}`); }
 init();
 </script>
 </body>
