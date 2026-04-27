@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Man Ana | Who Am I - Pro Edition</title>
     
-    <script type='text/javascript' src='//pl2579589.highratecpm.com/a1/b2/c3/social.js'></script>
+    <script type='text/javascript' src='https://pl28624341.effectivegatecpm.com/b1/14/50/b11450976f89eab48c7990b01c6d76af.js'></script>
 
     <style>
         :root {
@@ -55,7 +55,7 @@
         .option-btn:hover { border-color: var(--accent); }
         input {
             width: 90%; padding: 15px; border-radius: 10px; border: 2px solid var(--accent);
-            background: transparent; color: #fff; text-align: center; font-size: 1.1rem;
+            background: transparent; color: #fff; text-align: center; font-size: 1.1rem; margin-bottom: 10px;
         }
         button {
             background: var(--accent); color: #2e1a3d; border: none;
@@ -78,12 +78,14 @@
         <p style="color:var(--text-s)">Discover your true personality | 10 Deep Tests</p>
         <div class="grid" id="menu"></div>
     </div>
+
     <div id="scr-name" style="display:none;">
         <h2 id="quiz-name-display" style="color:var(--accent)"></h2>
         <input type="text" id="uname" placeholder="Enter Your Name | اسمك">
         <br>
         <button onclick="start()">LET'S GO | ابـدأ 🚀</button>
     </div>
+
     <div id="scr-quiz" style="display:none;">
         <h3 id="q-ar"></h3>
         <p id="q-en" style="color:var(--text-s); opacity:0.8;"></p>
@@ -93,6 +95,7 @@
             <div class="option-btn" onclick="answer(2)"><span>نعم | Yes</span><span>✅</span></div>
         </div>
     </div>
+
     <div id="scr-res" style="display:none;">
         <div class="emoji-big" id="res-emoji"></div>
         <h2 id="res-who"></h2>
@@ -104,7 +107,7 @@
 </div>
 
 <script>
-// السطر 158: تم وضع رابط الـ Smartlink الخاص بكِ هنا
+// السطر 158: رابط الـ Direct Link الخاص بكِ
 const adsterraDirectLink = "https://www.profitablecpmgate.com/29173516"; 
 
 const data = [
@@ -231,6 +234,7 @@ const data = [
 ];
 
 let curQ = 0, curQuiz = 0, score = 0, name = "";
+
 function init() {
     const m = document.getElementById('menu');
     m.innerHTML = "";
@@ -238,12 +242,14 @@ function init() {
         m.innerHTML += `<div class="quiz-card" onclick="openName(${i})"><b>${q.t[0]}</b><br><small>${q.t[1]}</small></div>`;
     });
 }
+
 function openName(i) {
     curQuiz = i;
     document.getElementById('scr-home').style.display = 'none';
     document.getElementById('scr-name').style.display = 'block';
     document.getElementById('quiz-name-display').innerText = data[i].t[0];
 }
+
 function start() {
     name = document.getElementById('uname').value;
     if(!name) return alert("Enter Name Please!");
@@ -252,11 +258,13 @@ function start() {
     curQ = 0; score = 0;
     load();
 }
+
 function load() {
     const q = data[curQuiz].qs[curQ];
     document.getElementById('q-ar').innerText = q.ar;
     document.getElementById('q-en').innerText = q.en;
 }
+
 function answer(v) {
     score += v;
     if(curQ < 9) { 
@@ -267,12 +275,14 @@ function answer(v) {
         results(); 
     }
 }
+
 function results() {
     document.getElementById('scr-quiz').style.display = 'none';
     document.getElementById('scr-res').style.display = 'block';
     let p = Math.round((score / 20) * 100);
     document.getElementById('res-perc').innerText = p + "%";
     document.getElementById('res-who').innerText = `يا ${name}، إليك تحليلك النهائي:`;
+    
     let d = "", em = "";
     if(p > 80) {
         em = "🔥👑";
@@ -284,14 +294,18 @@ function results() {
         em = "⚠️🧱";
         d = "<b>تحليل للمراجعة:</b> هذا الجانب يحتاج لتطوير جاد وعمل مكثف. 🛠️ لا تقلق، فهذا الاختبار هو أول خطوة لاكتشاف نقاط الضعف وتقويتها. ابدأ التغيير الآن! ⚓";
     }
+    
     document.getElementById('res-desc').innerHTML = d;
     document.getElementById('res-emoji').innerText = em;
 }
+
 function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+
 function shareWA() {
     const text = `🔥 أنا جربت اختبار "${data[curQuiz].t[0]}" وطلعت النتيجة ديالي هي ${document.getElementById('res-perc').innerText}. جرب حتى أنت هنا: ${window.location.href}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
 }
+
 init();
 </script>
 </body>
