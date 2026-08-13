@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizio - Simple tools for the things nobody taught you.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-card: #fdfbf7;
+            --bg-card-hover: #f5efe6;
+            --blue-dark: #0f2a4a;
+            --brown-dark: #3a2218;
+            --brown-accent: #5a3828;
+            --text-dark: #1a1a1a;
+            --text-muted: #665c54;
+            --border-color: #e8e2d8;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-sm: 0 4px 12px rgba(15, 42, 74, 0.05);
+            --shadow-hover: 0 8px 24px rgba(58, 34, 24, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HERO HEADER */
+        header {
+            text-align: center;
+            padding: 70px 20px 50px;
+            background-color: #fcfbfa;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #eef4fa;
+            color: var(--blue-dark);
+            border: 1px solid #d0e0f0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 20px;
+        }
+
+        .brand-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--blue-dark);
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero-text h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 6px;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-header-block {
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--brown-dark);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brown-dark);
+            letter-spacing: -0.5px;
+        }
+
+        /* HORIZONTAL GRID LAYOUT */
+        .checklists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* ACCORDION CARDS */
+        .accordion-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--brown-accent);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .accordion-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 20px 24px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-btn:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        .icon-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #eef4fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--blue-dark);
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .accordion-btn.active .icon-box {
+            transform: rotate(180deg);
+            background: var(--brown-dark);
+            color: #ffffff;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+            padding: 0 24px;
+            background-color: #ffffff;
+        }
+
+        /* CHECKLIST ITEMS */
+        .items-list {
+            list-style: none;
+            padding: 20px 0 10px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 10px;
+            border-radius: var(--radius-md);
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .item:hover {
+            background: #f8f6f2;
+        }
+
+        .item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--brown-dark);
+            cursor: pointer;
+        }
+
+        .item input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* DOWNLOAD BUTTON */
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background-color: var(--brown-dark);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            margin: 16px 0 24px 0;
+            transition: all 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: var(--blue-dark);
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            header, .icon-box, .download-btn { display: none !important; }
+            body { background: white; color: black; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .checklists-grid { display: block; }
+            .accordion-item { border: 1px solid #ccc; background: white; margin-bottom: 20px; break-inside: avoid; }
+            .accordion-content { max-height: none !important; padding: 0 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .checklists-grid { grid-template-columns: 1fr; }
+            .brand-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO HEADER -->
+    <header>
+        <span class="badge">Simple tools for the things nobody taught you.</span>
+        <h1 class="brand-title">Organizio</h1>
+        <div class="hero-text">
+            <h2>Life feels easier when everything is organized.</h2>
+            <p>Free interactive checklists, guides and practical tools for everyday life.</p>
+        </div>
+    </header>
+
+    <!-- MAIN BOARD -->
+    <div class="container">
+
+        <!-- 🏠 1. HOME & MOVING -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">🏠 HOME & MOVING</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>First Apartment Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Bedding, sheets, and pillows</span></label>
+                            <label class="item"><input type="checkbox"><span>Basic cookware, plates & utensils</span></label>
+                            <label class="item"><input type="checkbox"><span>Cleaning supplies & trash bags</span></label>
+                            <label class="item"><input type="checkbox"><span>Toiletries & shower curtain</span></label>
+                            <label class="item"><input type="checkbox"><span>First aid kit & basic toolbox</span></label>
+                            <label class="item"><input type="checkbox"><span>Bath towels and hand towels</span></label>
+                            <label class="item"><input type="checkbox"><span>Trash cans for kitchen & bath</span></label>
+                            <label class="item"><input type="checkbox"><span>Dish soap, sponges & drying rack</span></label>
+                            <label class="item"><input type="checkbox"><span>Laundry detergent & hamper</span></label>
+                            <label class="item"><input type="checkbox"><span>Broom, dustpan & mop set</span></label>
+                            <label class="item"><input type="checkbox"><span>Extension cords & power strips</span></label>
+                            <label class="item"><input type="checkbox"><span>Light bulbs & emergency flashlight</span></label>
+                            <label class="item"><input type="checkbox"><span>Food storage containers</span></label>
+                            <label class="item"><input type="checkbox"><span>Hangers for clothes closet</span></label>
+                            <label class="item"><input type="checkbox"><span>Wi-Fi router & setup</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Moving-Out Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Change address with bank & postal</span></label>
+                            <label class="item"><input type="checkbox"><span>Pack non-essentials 2 weeks early</span></label>
+                            <label class="item"><input type="checkbox"><span>Deep clean kitchen & fridge</span></label>
+                            <label class="item"><input type="checkbox"><span>Take photos/videos of empty home</span></label>
+                            <label class="item"><input type="checkbox"><span>Hand back all keys to landlord</span></label>
+                            <label class="item"><input type="checkbox"><span>Cancel/transfer utility services</span></label>
+                            <label class="item"><input type="checkbox"><span>Defrost freezer unit completely</span></label>
+                            <label class="item"><input type="checkbox"><span>Patch up small wall nail holes</span></label>
+                            <label class="item"><input type="checkbox"><span>Clear out storage & balcony</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule final walk-through</span></label>
+                            <label class="item"><input type="checkbox"><span>Confirm security deposit return</span></label>
+                            <label class="item"><input type="checkbox"><span>Label all moving boxes by room</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep essential overnight bag out</span></label>
+                            <label class="item"><input type="checkbox"><span>Book movers or moving truck</span></label>
+                            <label class="item"><input type="checkbox"><span>Dispose of hazardous materials</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>New Home Essentials</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Smoke & CO detector check</span></label>
+                            <label class="item"><input type="checkbox"><span>Wi-Fi setup & network password</span></label>
+                            <label class="item"><input type="checkbox"><span>Make spare key duplicates</span></label>
+                            <label class="item"><input type="checkbox"><span>Locate water & gas shut-off valves</span></label>
+                            <label class="item"><input type="checkbox"><span>Fire extinguisher placement</span></label>
+                            <label class="item"><input type="checkbox"><span>Window blinds/curtains for privacy</span></label>
+                            <label class="item"><input type="checkbox"><span>Welcome doormat & stoppers</span></label>
+                            <label class="item"><input type="checkbox"><span>Plunger & toilet brush set</span></label>
+                            <label class="item"><input type="checkbox"><span>Basic emergency kit & batteries</span></label>
+                            <label class="item"><input type="checkbox"><span>Pest control check & sealing</span></label>
+                            <label class="item"><input type="checkbox"><span>HVAC air filter replacement</span></label>
+                            <label class="item"><input type="checkbox"><span>Step stool for high shelves</span></label>
+                            <label class="item"><input type="checkbox"><span>Pantry & drawer organizers</span></label>
+                            <label class="item"><input type="checkbox"><span>Deep clean floors before unpacking</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up trash & recycling system</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Home Inventory</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Log serial numbers of electronics</span></label>
+                            <label class="item"><input type="checkbox"><span>Photograph expensive furniture</span></label>
+                            <label class="item"><input type="checkbox"><span>Store receipts for major appliances</span></label>
+                            <label class="item"><input type="checkbox"><span>Document jewelry & valuables list</span></label>
+                            <label class="item"><input type="checkbox"><span>Save digital inventory backup on cloud</span></label>
+                            <label class="item"><input type="checkbox"><span>Record power tool models & specs</span></label>
+                            <label class="item"><input type="checkbox"><span>Document artwork & collectibles</span></label>
+                            <label class="item"><input type="checkbox"><span>Log musical instruments</span></label>
+                            <label class="item"><input type="checkbox"><span>Note clothing/wardrobe value estimate</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep home improvement receipts</span></label>
+                            <label class="item"><input type="checkbox"><span>Photograph kitchen equipment</span></label>
+                            <label class="item"><input type="checkbox"><span>List high-end sports/fitness gear</span></label>
+                            <label class="item"><input type="checkbox"><span>Log home insurance policy number</span></label>
+                            <label class="item"><input type="checkbox"><span>Review inventory coverage annually</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep agent contact details saved</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Cleaning Reset Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Wipe all door handles & switches</span></label>
+                            <label class="item"><input type="checkbox"><span>Vacuum all rugs and carpets</span></label>
+                            <label class="item"><input type="checkbox"><span>Mop hard surface floors</span></label>
+                            <label class="item"><input type="checkbox"><span>Wash bed linens and pillowcases</span></label>
+                            <label class="item"><input type="checkbox"><span>Clean out old fridge items</span></label>
+                            <label class="item"><input type="checkbox"><span>Empty all household trash bins</span></label>
+                            <label class="item"><input type="checkbox"><span>Scrub bathroom sinks and toilet</span></label>
+                            <label class="item"><input type="checkbox"><span>Wipe down kitchen countertops</span></label>
+                            <label class="item"><input type="checkbox"><span>Clean microwave inside & out</span></label>
+                            <label class="item"><input type="checkbox"><span>Dust blinds and window sills</span></label>
+                            <label class="item"><input type="checkbox"><span>Replace dirty bath towels</span></label>
+                            <label class="item"><input type="checkbox"><span>Clean mirrors and glass surfaces</span></label>
+                            <label class="item"><input type="checkbox"><span>Run dishwasher or clean dishes</span></label>
+                            <label class="item"><input type="checkbox"><span>Declutter living room surfaces</span></label>
+                            <label class="item"><input type="checkbox"><span>Spray room air freshener</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 💰 2. MONEY & BILLS -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">💰 MONEY & BILLS</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Monthly Bills Tracker</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Rent / Mortgage due payment</span></label>
+                            <label class="item"><input type="checkbox"><span>Electricity & power bill</span></label>
+                            <label class="item"><input type="checkbox"><span>Water & sewage bill</span></label>
+                            <label class="item"><input type="checkbox"><span>Internet & Wi-Fi provider bill</span></label>
+                            <label class="item"><input type="checkbox"><span>Mobile phone plan payment</span></label>
+                            <label class="item"><input type="checkbox"><span>Credit card balance payment</span></label>
+                            <label class="item"><input type="checkbox"><span>Health insurance premium</span></label>
+                            <label class="item"><input type="checkbox"><span>Car loan or lease payment</span></label>
+                            <label class="item"><input type="checkbox"><span>Auto insurance payment</span></label>
+                            <label class="item"><input type="checkbox"><span>Home / Renters insurance</span></label>
+                            <label class="item"><input type="checkbox"><span>Streaming video subscriptions</span></label>
+                            <label class="item"><input type="checkbox"><span>Music streaming subscription</span></label>
+                            <label class="item"><input type="checkbox"><span>Gym / Fitness club dues</span></label>
+                            <label class="item"><input type="checkbox"><span>Cloud storage subscription</span></label>
+                            <label class="item"><input type="checkbox"><span>Emergency savings transfer</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Subscription Audit</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Review bank statement for debits</span></label>
+                            <label class="item"><input type="checkbox"><span>Audit active TV streaming apps</span></label>
+                            <label class="item"><input type="checkbox"><span>Audit audio / podcast apps</span></label>
+                            <label class="item"><input type="checkbox"><span>Cancel unused software subs</span></label>
+                            <label class="item"><input type="checkbox"><span>Check gym usage vs fee</span></label>
+                            <label class="item"><input type="checkbox"><span>Review app store subscriptions</span></label>
+                            <label class="item"><input type="checkbox"><span>Check gaming subscriptions</span></label>
+                            <label class="item"><input type="checkbox"><span>Audit cloud storage plans</span></label>
+                            <label class="item"><input type="checkbox"><span>Check news subscriptions</span></label>
+                            <label class="item"><input type="checkbox"><span>Cancel active free trials</span></label>
+                            <label class="item"><input type="checkbox"><span>Downgrade unused tiers</span></label>
+                            <label class="item"><input type="checkbox"><span>Switch to annual plans</span></label>
+                            <label class="item"><input type="checkbox"><span>Consolidate shared plans</span></label>
+                            <label class="item"><input type="checkbox"><span>Log total monthly spend</span></label>
+                            <label class="item"><input type="checkbox"><span>Set calendar reminder</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Monthly Spending Check</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Review grocery expenditures</span></label>
+                            <label class="item"><input type="checkbox"><span>Total dining & delivery spend</span></label>
+                            <label class="item"><input type="checkbox"><span>Track transport & fuel expenses</span></label>
+                            <label class="item"><input type="checkbox"><span>Review shopping purchases</span></label>
+                            <label class="item"><input type="checkbox"><span>Check entertainment spending</span></label>
+                            <label class="item"><input type="checkbox"><span>Compare spend vs budget</span></label>
+                            <label class="item"><input type="checkbox"><span>Identify impulse purchases</span></label>
+                            <label class="item"><input type="checkbox"><span>Review utility bill shifts</span></label>
+                            <label class="item"><input type="checkbox"><span>Check cash withdrawals</span></label>
+                            <label class="item"><input type="checkbox"><span>Calculate savings rate %</span></label>
+                            <label class="item"><input type="checkbox"><span>Audit bank account fees</span></label>
+                            <label class="item"><input type="checkbox"><span>Check card reward points</span></label>
+                            <label class="item"><input type="checkbox"><span>Adjust next month budget</span></label>
+                            <label class="item"><input type="checkbox"><span>Pay credit card balances</span></label>
+                            <label class="item"><input type="checkbox"><span>Archive monthly statement</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Savings Goal Tracker</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Define target amount & timeline</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up high-yield account</span></label>
+                            <label class="item"><input type="checkbox"><span>Enable payday auto-transfer</span></label>
+                            <label class="item"><input type="checkbox"><span>Track Emergency Fund</span></label>
+                            <label class="item"><input type="checkbox"><span>Track Vacation Fund progress</span></label>
+                            <label class="item"><input type="checkbox"><span>Track Major Purchase fund</span></label>
+                            <label class="item"><input type="checkbox"><span>Log monthly deposits</span></label>
+                            <label class="item"><input type="checkbox"><span>Calculate balance to goal</span></label>
+                            <label class="item"><input type="checkbox"><span>Review interest earned</span></label>
+                            <label class="item"><input type="checkbox"><span>Cut 1 expense category</span></label>
+                            <label class="item"><input type="checkbox"><span>Deposit extra income/bonuses</span></label>
+                            <label class="item"><input type="checkbox"><span>Celebrate 25% milestone</span></label>
+                            <label class="item"><input type="checkbox"><span>Celebrate 50% milestone</span></label>
+                            <label class="item"><input type="checkbox"><span>Celebrate 75% milestone</span></label>
+                            <label class="item"><input type="checkbox"><span>Rebalance savings strategy</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>“Where Did My Money Go?” Worksheet</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Log net monthly income</span></label>
+                            <label class="item"><input type="checkbox"><span>Subtract housing & utility costs</span></label>
+                            <label class="item"><input type="checkbox"><span>Subtract debt payments</span></label>
+                            <label class="item"><input type="checkbox"><span>Subtract groceries spent</span></label>
+                            <label class="item"><input type="checkbox"><span>List daily coffee/snack buys</span></label>
+                            <label class="item"><input type="checkbox"><span>List online shopping receipts</span></label>
+                            <label class="item"><input type="checkbox"><span>List ride-share fares</span></label>
+                            <label class="item"><input type="checkbox"><span>List small convenience buys</span></label>
+                            <label class="item"><input type="checkbox"><span>Calculate unplanned spend</span></label>
+                            <label class="item"><input type="checkbox"><span>Identify top 3 money leaks</span></label>
+                            <label class="item"><input type="checkbox"><span>Set daily discretionary cap</span></label>
+                            <label class="item"><input type="checkbox"><span>Apply 48-hour purchasing rule</span></label>
+                            <label class="item"><input type="checkbox"><span>Remove saved online card info</span></label>
+                            <label class="item"><input type="checkbox"><span>Track cash spent in notepad</span></label>
+                            <label class="item"><input type="checkbox"><span>Re-evaluate leaks next week</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 📄 3. DOCUMENTS & LIFE ADMIN -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">📄 DOCUMENTS & LIFE ADMIN</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Important Documents Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Birth Certificate safe storage</span></label>
+                            <label class="item"><input type="checkbox"><span>Passport valid & secured</span></label>
+                            <label class="item"><input type="checkbox"><span>ID / Driver's License copy</span></label>
+                            <label class="item"><input type="checkbox"><span>Social Security / Tax ID docs</span></label>
+                            <label class="item"><input type="checkbox"><span>Marriage / Status certificates</span></label>
+                            <label class="item"><input type="checkbox"><span>Property deeds / Lease papers</span></label>
+                            <label class="item"><input type="checkbox"><span>Vehicle title & registration</span></label>
+                            <label class="item"><input type="checkbox"><span>Health & life insurance policies</span></label>
+                            <label class="item"><input type="checkbox"><span>Diplomas & academic transcripts</span></label>
+                            <label class="item"><input type="checkbox"><span>Employment contracts & taxes</span></label>
+                            <label class="item"><input type="checkbox"><span>Will & estate documents</span></label>
+                            <label class="item"><input type="checkbox"><span>Bank account ledger</span></label>
+                            <label class="item"><input type="checkbox"><span>Medical & vaccine records</span></label>
+                            <label class="item"><input type="checkbox"><span>Store in fireproof safe</span></label>
+                            <label class="item"><input type="checkbox"><span>Encrypt digital cloud copy</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Emergency Contacts Sheet</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Primary Emergency Contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Secondary Emergency Contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Local Police non-emergency</span></label>
+                            <label class="item"><input type="checkbox"><span>Local Fire Department line</span></label>
+                            <label class="item"><input type="checkbox"><span>Poison Control hotline</span></label>
+                            <label class="item"><input type="checkbox"><span>Primary Physician contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Hospital ER address</span></label>
+                            <label class="item"><input type="checkbox"><span>Insurance provider line</span></label>
+                            <label class="item"><input type="checkbox"><span>Electric Utility emergency</span></label>
+                            <label class="item"><input type="checkbox"><span>Water Utility emergency</span></label>
+                            <label class="item"><input type="checkbox"><span>Gas Utility emergency</span></label>
+                            <label class="item"><input type="checkbox"><span>Trusted neighbor contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Veterinarian phone number</span></label>
+                            <label class="item"><input type="checkbox"><span>Print physical copy for fridge</span></label>
+                            <label class="item"><input type="checkbox"><span>Save Medical ID on phone</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Annual Life Admin Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>File annual tax return</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule medical checkup</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule dental cleaning</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule vision checkup</span></label>
+                            <label class="item"><input type="checkbox"><span>Review insurance policies</span></label>
+                            <label class="item"><input type="checkbox"><span>Check credit report & score</span></label>
+                            <label class="item"><input type="checkbox"><span>Update password vault</span></label>
+                            <label class="item"><input type="checkbox"><span>Clean & backup computer drive</span></label>
+                            <label class="item"><input type="checkbox"><span>Review subscription spend</span></label>
+                            <label class="item"><input type="checkbox"><span>Review retirement fund</span></label>
+                            <label class="item"><input type="checkbox"><span>Check smoke detector batteries</span></label>
+                            <label class="item"><input type="checkbox"><span>Replace HVAC filters</span></label>
+                            <label class="item"><input type="checkbox"><span>Purge & donate old wardrobe</span></label>
+                            <label class="item"><input type="checkbox"><span>Shred outdated financials</span></label>
+                            <label class="item"><input type="checkbox"><span>Set upcoming year goals</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Account & Membership Tracker</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Bank accounts & cards list</span></label>
+                            <label class="item"><input type="checkbox"><span>Investment & brokerage accounts</span></label>
+                            <label class="item"><input type="checkbox"><span>Frequent Flyer programs</span></label>
+                            <label class="item"><input type="checkbox"><span>Hotel loyalty memberships</span></label>
+                            <label class="item"><input type="checkbox"><span>Store reward cards</span></label>
+                            <label class="item"><input type="checkbox"><span>Gym & sports club accounts</span></label>
+                            <label class="item"><input type="checkbox"><span>Professional organization accounts</span></label>
+                            <label class="item"><input type="checkbox"><span>Library card details</span></label>
+                            <label class="item"><input type="checkbox"><span>Online shopping account directory</span></label>
+                            <label class="item"><input type="checkbox"><span>Cloud software & email logins</span></label>
+                            <label class="item"><input type="checkbox"><span>Streaming & media accounts</span></label>
+                            <label class="item"><input type="checkbox"><span>Utility customer accounts</span></label>
+                            <label class="item"><input type="checkbox"><span>Log recovery details</span></label>
+                            <label class="item"><input type="checkbox"><span>Enable 2FA on critical apps</span></label>
+                            <label class="item"><input type="checkbox"><span>Store encrypted in password manager</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Renewal Dates Tracker</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Passport expiration log</span></label>
+                            <label class="item"><input type="checkbox"><span>Driver’s License renewal date</span></label>
+                            <label class="item"><input type="checkbox"><span>National ID renewal date</span></label>
+                            <label class="item"><input type="checkbox"><span>Car Registration renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Vehicle Inspection date</span></label>
+                            <label class="item"><input type="checkbox"><span>Auto Insurance renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Health Insurance policy renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Home / Renters Insurance renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Debit/Credit card expiration</span></label>
+                            <label class="item"><input type="checkbox"><span>Domain & web hosting renewals</span></label>
+                            <label class="item"><input type="checkbox"><span>Professional License renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Software license renewals</span></label>
+                            <label class="item"><input type="checkbox"><span>Gym membership renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Set calendar alerts 30 days prior</span></label>
+                            <label class="item"><input type="checkbox"><span>Review cost updates before renewing</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ✈️ 4. TRAVEL -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">✈️ TRAVEL</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Pre-Trip Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Passport validity (>6 months)</span></label>
+                            <label class="item"><input type="checkbox"><span>Apply for travel visa if required</span></label>
+                            <label class="item"><input type="checkbox"><span>Confirm flight & hotel bookings</span></label>
+                            <label class="item"><input type="checkbox"><span>Notify bank of travel plans</span></label>
+                            <label class="item"><input type="checkbox"><span>Buy travel insurance policy</span></label>
+                            <label class="item"><input type="checkbox"><span>Download offline maps</span></label>
+                            <label class="item"><input type="checkbox"><span>Check destination weather</span></label>
+                            <label class="item"><input type="checkbox"><span>Arrange pet / house sitter</span></label>
+                            <label class="item"><input type="checkbox"><span>Hold mail delivery</span></label>
+                            <label class="item"><input type="checkbox"><span>Clean out perishable fridge food</span></label>
+                            <label class="item"><input type="checkbox"><span>Take out home trash bins</span></label>
+                            <label class="item"><input type="checkbox"><span>Unplug non-essentials</span></label>
+                            <label class="item"><input type="checkbox"><span>Lock all windows & deadbolts</span></label>
+                            <label class="item"><input type="checkbox"><span>Share itinerary with family</span></label>
+                            <label class="item"><input type="checkbox"><span>Complete flight check-in</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Packing Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Underwear & socks for all days</span></label>
+                            <label class="item"><input type="checkbox"><span>Shirts, tops & layering clothes</span></label>
+                            <label class="item"><input type="checkbox"><span>Pants, shorts, or skirts</span></label>
+                            <label class="item"><input type="checkbox"><span>Pajamas & sleepwear</span></label>
+                            <label class="item"><input type="checkbox"><span>Comfortable walking shoes</span></label>
+                            <label class="item"><input type="checkbox"><span>Toiletry kit essentials</span></label>
+                            <label class="item"><input type="checkbox"><span>Liquids in 100ml clear pouch</span></label>
+                            <label class="item"><input type="checkbox"><span>Phone charger & power bank</span></label>
+                            <label class="item"><input type="checkbox"><span>Universal wall adapter</span></label>
+                            <label class="item"><input type="checkbox"><span>Personal prescription meds</span></label>
+                            <label class="item"><input type="checkbox"><span>Basic medical kit</span></label>
+                            <label class="item"><input type="checkbox"><span>Sunglasses & sunscreen</span></label>
+                            <label class="item"><input type="checkbox"><span>Travel pillow & earplugs</span></label>
+                            <label class="item"><input type="checkbox"><span>Reusable water bottle</span></label>
+                            <label class="item"><input type="checkbox"><span>Laundry bag for worn clothes</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Travel Documents Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Passport & Driver's License</span></label>
+                            <label class="item"><input type="checkbox"><span>Printed or digital Boarding Pass</span></label>
+                            <label class="item"><input type="checkbox"><span>Printed Visa authorization</span></label>
+                            <label class="item"><input type="checkbox"><span>Hotel booking confirmation</span></label>
+                            <label class="item"><input type="checkbox"><span>Rental car reservation details</span></label>
+                            <label class="item"><input type="checkbox"><span>Travel Insurance document</span></label>
+                            <label class="item"><input type="checkbox"><span>International Driving Permit</span></label>
+                            <label class="item"><input type="checkbox"><span>Vaccination card or health records</span></label>
+                            <label class="item"><input type="checkbox"><span>Photocopy of passport photo page</span></label>
+                            <label class="item"><input type="checkbox"><span>Emergency embassy details</span></label>
+                            <label class="item"><input type="checkbox"><span>Fee-free credit/debit cards</span></label>
+                            <label class="item"><input type="checkbox"><span>Destination local currency</span></label>
+                            <label class="item"><input type="checkbox"><span>Travel itinerary printout</span></label>
+                            <label class="item"><input type="checkbox"><span>Digital backup on smartphone</span></label>
+                            <label class="item"><input type="checkbox"><span>Digital backup on cloud</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>First-Time Solo Travel Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Share live location with family</span></label>
+                            <label class="item"><input type="checkbox"><span>Book first 2 nights lodging</span></label>
+                            <label class="item"><input type="checkbox"><span>Arrange official airport pickup</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep emergency cash hidden</span></label>
+                            <label class="item"><input type="checkbox"><span>Store local emergency numbers</span></label>
+                            <label class="item"><input type="checkbox"><span>Get local eSIM or data plan</span></label>
+                            <label class="item"><input type="checkbox"><span>Pack door stop alarm</span></label>
+                            <label class="item"><input type="checkbox"><span>Research common tourist scams</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep valuable gear in front pack</span></label>
+                            <label class="item"><input type="checkbox"><span>Learn basic greetings</span></label>
+                            <label class="item"><input type="checkbox"><span>Memorize hotel address</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up daily check-in routine</span></label>
+                            <label class="item"><input type="checkbox"><span>Carry portable charger daily</span></label>
+                            <label class="item"><input type="checkbox"><span>Download translation app</span></label>
+                            <label class="item"><input type="checkbox"><span>Avoid dark unlit streets</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Post-Trip Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Unpack luggage in 24 hours</span></label>
+                            <label class="item"><input type="checkbox"><span>Do travel laundry</span></label>
+                            <label class="item"><input type="checkbox"><span>Wipe luggage exterior & wheels</span></label>
+                            <label class="item"><input type="checkbox"><span>Return toiletries to vanity</span></label>
+                            <label class="item"><input type="checkbox"><span>Review card foreign charges</span></label>
+                            <label class="item"><input type="checkbox"><span>Submit work expense claims</span></label>
+                            <label class="item"><input type="checkbox"><span>Backup vacation photos</span></label>
+                            <label class="item"><input type="checkbox"><span>Organize digital photo album</span></label>
+                            <label class="item"><input type="checkbox"><span>Store remaining foreign cash</span></label>
+                            <label class="item"><input type="checkbox"><span>Unpause mail delivery</span></label>
+                            <label class="item"><input type="checkbox"><span>Restock travel toiletry bottles</span></label>
+                            <label class="item"><input type="checkbox"><span>Store luggage in closet</span></label>
+                            <label class="item"><input type="checkbox"><span>Send thank you note to hosts</span></label>
+                            <label class="item"><input type="checkbox"><span>Write online hotel reviews</span></label>
+                            <label class="item"><input type="checkbox"><span>Rest and reset sleep schedule</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 💼 5. WORK & CAREER -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">💼 WORK & CAREER</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>First Job Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Sign employment contract</span></label>
+                            <label class="item"><input type="checkbox"><span>Submit tax identification forms</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up direct deposit details</span></label>
+                            <label class="item"><input type="checkbox"><span>Review employee handbook</span></label>
+                            <label class="item"><input type="checkbox"><span>Confirm dress code rules</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up LinkedIn profile</span></label>
+                            <label class="item"><input type="checkbox"><span>Prepare commuter route</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up health/retirement plans</span></label>
+                            <label class="item"><input type="checkbox"><span>Create work email signature</span></label>
+                            <label class="item"><input type="checkbox"><span>Organize desk or home office</span></label>
+                            <label class="item"><input type="checkbox"><span>Introduce self to team</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule 30-day manager review</span></label>
+                            <label class="item"><input type="checkbox"><span>Log passwords in manager tool</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up work calendar system</span></label>
+                            <label class="item"><input type="checkbox"><span>Set work-life boundaries</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Job Application Tracker</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Tailor CV to job description</span></label>
+                            <label class="item"><input type="checkbox"><span>Write custom cover letter</span></label>
+                            <label class="item"><input type="checkbox"><span>Log company name & salary</span></label>
+                            <label class="item"><input type="checkbox"><span>Record date submitted</span></label>
+                            <label class="item"><input type="checkbox"><span>Save copy of original listing</span></label>
+                            <label class="item"><input type="checkbox"><span>Note key recruiter contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Connect on LinkedIn</span></label>
+                            <label class="item"><input type="checkbox"><span>Send follow-up after 7-10 days</span></label>
+                            <label class="item"><input type="checkbox"><span>Log HR screening date</span></label>
+                            <label class="item"><input type="checkbox"><span>Log technical interview date</span></label>
+                            <label class="item"><input type="checkbox"><span>Log final interview panel</span></label>
+                            <label class="item"><input type="checkbox"><span>Send post-interview thank you</span></label>
+                            <label class="item"><input type="checkbox"><span>Record offer/rejection details</span></label>
+                            <label class="item"><input type="checkbox"><span>Evaluate offer expectations</span></label>
+                            <label class="item"><input type="checkbox"><span>Negotiate salary & benefits</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Interview Preparation Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Research company history & culture</span></label>
+                            <label class="item"><input type="checkbox"><span>Review interviewer LinkedIn</span></label>
+                            <label class="item"><input type="checkbox"><span>Prepare 3-5 STAR stories</span></label>
+                            <label class="item"><input type="checkbox"><span>Prepare "Tell me about yourself"</span></label>
+                            <label class="item"><input type="checkbox"><span>Prepare 3 questions to ask</span></label>
+                            <label class="item"><input type="checkbox"><span>Print 3 physical CV copies</span></label>
+                            <label class="item"><input type="checkbox"><span>Plan outfit night before</span></label>
+                            <label class="item"><input type="checkbox"><span>Test webcam, mic & lighting</span></label>
+                            <label class="item"><input type="checkbox"><span>Test Zoom / Teams 15 min early</span></label>
+                            <label class="item"><input type="checkbox"><span>Arrive 10 minutes early</span></label>
+                            <label class="item"><input type="checkbox"><span>Bring notepad and working pen</span></label>
+                            <label class="item"><input type="checkbox"><span>Review job requirements</span></label>
+                            <label class="item"><input type="checkbox"><span>Prepare salary range response</span></label>
+                            <label class="item"><input type="checkbox"><span>Keep water bottle nearby</span></label>
+                            <label class="item"><input type="checkbox"><span>Send thank you in 24 hours</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Work Documents Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Master CV copy archive</span></label>
+                            <label class="item"><input type="checkbox"><span>Portfolio of work samples</span></label>
+                            <label class="item"><input type="checkbox"><span>List of 3 professional references</span></label>
+                            <label class="item"><input type="checkbox"><span>Degrees & official transcripts</span></label>
+                            <label class="item"><input type="checkbox"><span>Professional certification docs</span></label>
+                            <label class="item"><input type="checkbox"><span>Signed contracts archive</span></label>
+                            <label class="item"><input type="checkbox"><span>Performance review reports</span></label>
+                            <label class="item"><input type="checkbox"><span>Pay stubs / salary slips file</span></label>
+                            <label class="item"><input type="checkbox"><span>Annual tax statement forms</span></label>
+                            <label class="item"><input type="checkbox"><span>Non-disclosure agreement copies</span></label>
+                            <label class="item"><input type="checkbox"><span>Health benefits policy file</span></label>
+                            <label class="item"><input type="checkbox"><span>Pension / Retirement statement</span></label>
+                            <label class="item"><input type="checkbox"><span>Work visa / permit papers</span></label>
+                            <label class="item"><input type="checkbox"><span>Store backups off work laptop</span></label>
+                            <label class="item"><input type="checkbox"><span>Update credentials yearly</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>First-Day-at-Work Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Bring ID & onboarding papers</span></label>
+                            <label class="item"><input type="checkbox"><span>Arrive 10 minutes early</span></label>
+                            <label class="item"><input type="checkbox"><span>Complete badge & building access</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up laptop, email & apps</span></label>
+                            <label class="item"><input type="checkbox"><span>Meet supervisor & buddy</span></label>
+                            <label class="item"><input type="checkbox"><span>Take office tour</span></label>
+                            <label class="item"><input type="checkbox"><span>Attend HR presentation</span></label>
+                            <label class="item"><input type="checkbox"><span>Note down key team names</span></label>
+                            <label class="item"><input type="checkbox"><span>Review 1st week schedule</span></label>
+                            <label class="item"><input type="checkbox"><span>Set up 2FA on company tools</span></label>
+                            <label class="item"><input type="checkbox"><span>Ask questions on team workflow</span></label>
+                            <label class="item"><input type="checkbox"><span>Confirm lunch break culture</span></label>
+                            <label class="item"><input type="checkbox"><span>Organize digital desktop</span></label>
+                            <label class="item"><input type="checkbox"><span>Save key onboarding links</span></label>
+                            <label class="item"><input type="checkbox"><span>Send end-of-day check-in</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 🐾 6. PETS -->
+        <div class="category-section">
+            <div class="category-header-block">
+                <h3 class="category-title">🐾 PETS</h3>
+            </div>
+            <div class="checklists-grid">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>New Pet Checklist</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Stainless steel food/water bowls</span></label>
+                            <label class="item"><input type="checkbox"><span>Age-appropriate pet food</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet bed & blanket</span></label>
+                            <label class="item"><input type="checkbox"><span>Collar with ID tag</span></label>
+                            <label class="item"><input type="checkbox"><span>Leash & sturdy harness</span></label>
+                            <label class="item"><input type="checkbox"><span>Litter box & litter (cats)</span></label>
+                            <label class="item"><input type="checkbox"><span>Waste bags (dogs)</span></label>
+                            <label class="item"><input type="checkbox"><span>Chew & play toys</span></label>
+                            <label class="item"><input type="checkbox"><span>Grooming brush & shampoo</span></label>
+                            <label class="item"><input type="checkbox"><span>Nail clippers</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet crate or carrier</span></label>
+                            <label class="item"><input type="checkbox"><span>Schedule initial vet checkup</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet-proof home environment</span></label>
+                            <label class="item"><input type="checkbox"><span>Enrol in pet insurance</span></label>
+                            <label class="item"><input type="checkbox"><span>Microchip registration update</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Pet Information Sheet</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Pet name, breed & birthdate</span></label>
+                            <label class="item"><input type="checkbox"><span>Microchip ID number</span></label>
+                            <label class="item"><input type="checkbox"><span>Primary Vet clinic contact</span></label>
+                            <label class="item"><input type="checkbox"><span>24/7 Emergency Vet hospital</span></label>
+                            <label class="item"><input type="checkbox"><span>Vaccination history log</span></label>
+                            <label class="item"><input type="checkbox"><span>Prescription meds & dosage</span></label>
+                            <label class="item"><input type="checkbox"><span>Dietary restrictions & allergies</span></label>
+                            <label class="item"><input type="checkbox"><span>Daily feeding portion</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet insurance policy number</span></label>
+                            <label class="item"><input type="checkbox"><span>Behavioral fear triggers</span></label>
+                            <label class="item"><input type="checkbox"><span>Favorite treats & toys</span></label>
+                            <label class="item"><input type="checkbox"><span>Grooming schedule notes</span></label>
+                            <label class="item"><input type="checkbox"><span>Flea & tick preventative log</span></label>
+                            <label class="item"><input type="checkbox"><span>Weight tracking chart</span></label>
+                            <label class="item"><input type="checkbox"><span>Digital copy saved on phone</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Pet-Sitter Instructions</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Meal portions & feeding times</span></label>
+                            <label class="item"><input type="checkbox"><span>Fresh water refill rules</span></label>
+                            <label class="item"><input type="checkbox"><span>Medication dosing instructions</span></label>
+                            <label class="item"><input type="checkbox"><span>Walking schedule & routine</span></label>
+                            <label class="item"><input type="checkbox"><span>Litter box disposal rules</span></label>
+                            <label class="item"><input type="checkbox"><span>Home entry & alarm codes</span></label>
+                            <label class="item"><input type="checkbox"><span>Emergency phone number</span></label>
+                            <label class="item"><input type="checkbox"><span>Vet clinic authorization</span></label>
+                            <label class="item"><input type="checkbox"><span>Favorite hiding spots if scared</span></label>
+                            <label class="item"><input type="checkbox"><span>Approved treats & daily limit</span></label>
+                            <label class="item"><input type="checkbox"><span>Furniture access rules</span></label>
+                            <label class="item"><input type="checkbox"><span>Extra food & cleaning location</span></label>
+                            <label class="item"><input type="checkbox"><span>Favorite play activities</span></label>
+                            <label class="item"><input type="checkbox"><span>Backup neighbor contact</span></label>
+                            <label class="item"><input type="checkbox"><span>Expectation for daily photo updates</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn"><span>Vet Records Organizer</span><span class="icon-box">▼</span></button>
+                    <div class="accordion-content">
+                        <ul class="items-list">
+                            <label class="item"><input type="checkbox"><span>Rabies vaccination certificate</span></label>
+                            <label class="item"><input type="checkbox"><span>Core vaccine annual record</span></label>
+                            <label class="item"><input type="checkbox"><span>Spay / Neuter certificate</span></label>
+                            <label class="item"><input type="checkbox"><span>Microchip paperwork</span></label>
+                            <label class="item"><input type="checkbox"><span>Heartworm test results</span></label>
+                            <label class="item"><input type="checkbox"><span>Annual physical exam summaries</span></label>
+                            <label class="item"><input type="checkbox"><span>Bloodwork & lab test files</span></label>
+                            <label class="item"><input type="checkbox"><span>Surgical / Dental records</span></label>
+                            <label class="item"><input type="checkbox"><span>Prescription history ledger</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet weight trend chart</span></label>
+                            <label class="item"><input type="checkbox"><span>Allergy diagnosis docs</span></label>
+                            <label class="item"><input type="checkbox"><span>X-Ray & Scan medical files</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet insurance claim records</span></label>
+                            <label class="item"><input type="checkbox"><span>Pet license / registration renewal</span></label>
+                            <label class="item"><input type="checkbox"><span>Scan records to cloud folder</span></label>
+                        </ul>
+                        <button class="download-btn" onclick="window.print()">DOWNLOAD YOUR CHECKLIST (FREE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACCORDION SCRIPT -->
+    <script>
+        const accBtns = document.querySelectorAll('.accordion-btn');
+
+        accBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const isOpen = btn.classList.contains('active');
+                
+                if (isOpen) {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.style.maxHeight = null;
+                } else {
+                    btn.classList.add('active');
+                    const content = btn.nextElementSibling;
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
